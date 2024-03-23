@@ -1,1 +1,6 @@
-// @include font-face("Muller", "../fonts/MullerRegular", 400, normal);
+@font-face {
+    font-family: "Gilroy", sans-serif;
+    src: url('./fonts/Gilroy-Black.woff2')format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
