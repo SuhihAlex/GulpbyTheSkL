@@ -55,6 +55,7 @@ exports.font = font;
 exports.clear = clear;
 exports.watch = watcher;
 exports.zip = zipFiles;
+exports.build = build;
 
 // Сборка
 exports.default = app.isProd

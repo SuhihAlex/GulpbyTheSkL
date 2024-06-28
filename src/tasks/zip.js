@@ -1,24 +1,27 @@
 const { src, dest } = require('gulp');
-const clear = require('./clear.js');
+const del = require('del');
 
 // Плагины
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
 const zip = require('gulp-zip');
-const path = require('path');
 
 
-const zipFiles = (done) => {
-  clear.sync([`./dist/*.zip`]);
-  return src(`./dist/**/*.*`, {})
-    .pipe(plumber(
-      notify.onError({
-        title: "ZIP",
-        message: error.message
-      })
-    ))
-    .pipe(zip(`path.zip`))
-    .pipe(dest('./dist'));
+const zipFiles = () => {
+  return del(['./dist/*.zip']).then(() => {
+    return src('./dist/**/*.*')
+      .pipe(plumber({
+        errorHandler: function(err) {
+          notify.onError({
+            title: 'ZIP',
+            message: err.message
+          })(err);
+          this.emit('end');
+        }
+      }))
+      .pipe(zip('archive.zip'))
+      .pipe(dest('./dist'));
+  });
 }
 
 // Подключения

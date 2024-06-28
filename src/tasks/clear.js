@@ -3,7 +3,7 @@ const del = require('del');
 
 // Удаление директории
 const clear = () => {
-    return del('./dist');
-}
+    return del('./dist', { force: true });
+};
 
 module.exports = clear;
